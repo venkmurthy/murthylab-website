@@ -1,10 +1,10 @@
 /* ============ tokens ============ */
 :root{
-  --ground:#12161C; --paper:#F7F6F3; --ink:#171B21; --ink-soft:#4A525C;
+  --ground:#00274C; --paper:#F7F6F3; --ink:#171B21; --ink-soft:#4A525C;
   --rule:#DEDAD2;
-  --amber:#C87F32;      /* perfusion   */
+  --amber:#8F6410;      /* perfusion   */
   --mark-amber:#C87F32; --mark-cyan:#3E7C8C; --mark-violet:#6B5B7B;
-  --cyan:#3E7C8C;       /* multiomics  */
+  --cyan:#3A7482;       /* multiomics  */
   --violet:#6B5B7B;     /* ai/ml       */
   --measure:64ch;
   --step--1:clamp(.78rem,.74rem + .18vw,.86rem);
@@ -45,7 +45,7 @@ a{color:inherit}
 .hero .wrap{position:relative;z-index:2}
 .hero h1{font-family:var(--display);font-weight:600;font-size:var(--step-3);
   line-height:1.04;letter-spacing:-.035em;margin:0 0 1.3rem;max-width:19ch}
-.hero p.dek{max-width:56ch;color:#C9CDD3;font-size:var(--step-1);line-height:1.5;margin:0}
+.hero p.dek{max-width:56ch;color:#C6D2E0;font-size:var(--step-1);line-height:1.5;margin:0}
 .eyebrow{font-family:var(--mono);font-size:.68rem;letter-spacing:.16em;
   text-transform:uppercase;color:var(--amber);margin:0 0 1.6rem}
 #field{position:absolute;inset:0;width:100%;height:100%;z-index:1;opacity:.9}
@@ -71,14 +71,14 @@ a{color:inherit}
   gap:clamp(1.5rem,5vw,4rem);margin-bottom:clamp(3rem,7vh,5rem)}
 .res:last-child{margin-bottom:0}
 .res h2{font-family:var(--display);font-weight:600;font-size:var(--step-2);
-  letter-spacing:-.028em;line-height:1.1;margin:0;position:sticky;top:96px;align-self:start}
+  letter-spacing:-.028em;line-height:1.1;margin:0}
 .res .lede{font-size:var(--step-1);line-height:1.45;margin:0 0 1.4rem;
   max-width:var(--measure);letter-spacing:-.01em}
 .res p{max-width:var(--measure);margin:0 0 1.05rem;color:#2B313A}
 .res p:last-child{margin-bottom:0}
 .stat{font-family:var(--mono);font-size:.94em;font-variant-numeric:tabular-nums;
   border-bottom:1px solid currentColor;padding-bottom:.5px}
-.r1 .stat{color:#9C5F1C} .r2 .stat{color:#2F6273} .r3 .stat{color:#584A66}
+.r1 .stat{color:#94591A} .r2 .stat{color:#2F6273} .r3 .stat{color:#584A66}
 
 /* ============ people ============ */
 .plist{display:grid;grid-template-columns:repeat(auto-fill,minmax(212px,1fr));gap:1.6rem 1.4rem}
@@ -138,7 +138,7 @@ footer a{color:#B9C0C7}
 
 @media(max-width:720px){
   .res{grid-template-columns:1fr}
-  .res h2{position:static}
+  .res-head{position:static}
   .nav .wrap{gap:1.1rem;overflow-x:auto}
   .brand-inst{display:none}
   .brand .mark{width:23px;height:23px;flex-basis:23px}
@@ -148,3 +148,38 @@ footer a{color:#B9C0C7}
   *{animation-duration:.01ms!important;transition-duration:.01ms!important}
 }
 :focus-visible{outline:2px solid var(--amber);outline-offset:3px}
+
+
+/* --- U-M palette -------------------------------------------------- */
+
+/* Second research section on a warm band. Painted with box-shadow rather
+   than a pseudo-element: body carries background:var(--paper), so a
+   z-index:-1 element would paint behind it and disappear in Firefox. */
+.res{padding-block:clamp(2.4rem,5vh,3.6rem);margin-bottom:0}
+.res.r2{background:#F1EEE7;
+        box-shadow:0 0 0 100vmax #F1EEE7;
+        clip-path:inset(0 -100vmax)}
+.sec{padding-bottom:0}
+@media (max-width:900px){.res{padding-block:2.2rem}}
+
+/* Maize only ever on the blue ground - 9.9:1 there, 1.4:1 on white. */
+.hero .stat{color:#FFCB05}
+.site-footer a{color:#FFCB05}
+
+/* Section eyebrows in blue rather than grey. */
+.sec-h{color:#00274C;border-bottom-color:#00274C}
+
+/* --- theme graphics ------------------------------------------------ */
+/* .res is a two-column grid; .res-head holds the heading and its figure
+   together in the sticky left column. */
+.res-head{position:sticky;top:96px;align-self:start}
+.res-head h2{position:static}
+.res-fig{display:block;width:100%;max-width:200px;height:auto;margin-top:1.4rem;
+         color:var(--ink)}
+.res.r1 .res-fig{--tac-input:var(--amber)}
+.res.r2 .res-fig{--cca-a:var(--cyan);--cca-b:var(--violet)}
+.res.r3 .res-fig{--ai-node:var(--violet)}
+@media (max-width:720px){
+  .res-head{position:static}
+  .res-fig{margin:1rem 0 .5rem;max-width:170px}
+}
