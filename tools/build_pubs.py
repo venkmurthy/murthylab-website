@@ -21,6 +21,25 @@ import re
 import sys
 from collections import Counter
 
+from journal_names import JOURNALS
+
+_unmapped_journals = set()
+
+
+def _journal(name):
+    """Return the journal's masthead form; record anything unmapped."""
+    name = ' '.join(name.split())
+    if not name:
+        return name
+    for cand in (name,
+                 name.replace('\\&', '&'),
+                 name.replace('&', '\\&')):
+        if cand in JOURNALS:
+            return JOURNALS[cand]
+    _unmapped_journals.add(name)
+    return name
+
+
 # --------------------------------------------------------------------------
 # BibTeX parsing
 # --------------------------------------------------------------------------
@@ -65,7 +84,7 @@ def parse_bib(path):
             'title': _field(body, 'title'),
             'author': _field(body, 'author'),
             'year': _field(body, 'year'),
-            'journal': _field(body, 'journal') or _field(body, 'booktitle'),
+            'journal': _journal(_field(body, 'journal') or _field(body, 'booktitle')),
             'volume': _field(body, 'volume'),
             'pages': _field(body, 'pages'),
             'doi': _field(body, 'doi'),
